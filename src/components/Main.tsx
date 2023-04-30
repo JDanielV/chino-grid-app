@@ -1,6 +1,5 @@
-import React, { useState, ChangeEventHandler } from "react";
+import React, { useState } from "react";
 import { Grid } from "./Grid";
-import { log } from "console";
 
 export const Main: React.FunctionComponent = () => {
   const [numItems, setNumItems] = useState<number>(5);
@@ -23,7 +22,11 @@ export const Main: React.FunctionComponent = () => {
           onChange={handleInputChange}
         />
       </fieldset>
-      <Grid numItems={numItems} />
+      {numItems != null && numItems > 4 && numItems % 5 === 0 ? (
+        <Grid numItems={numItems} />
+      ) : (
+        <span>Must be multiple of 5!!!!!!!!!</span>
+      )}
     </div>
   );
 };
