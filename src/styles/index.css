@@ -1,0 +1,17 @@
+.grid {
+  display: flex;
+  flex-wrap: wrap;
+  margin: 1rem;
+  padding: 1rem;
+  max-width: 30rem;
+  border: 2px solid darkblue;
+}
+.grid__item {
+  flex: 1 0 21%;
+  margin: 5px;
+  height: 100px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: 1px solid black;
+}/*# sourceMappingURL=index.css.map */

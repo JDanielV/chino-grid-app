@@ -1,5 +1,6 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Grid } from "./Grid";
+import { log } from "console";
 
 export const Main: React.FunctionComponent = () => {
   const [numItems, setNumItems] = useState<number>(5);
@@ -12,19 +13,32 @@ export const Main: React.FunctionComponent = () => {
       setNumItems(Number(e.target.value));
     } else if (e.target.name === "max-random-number") {
       setMaxRandomNum(Number(e.target.value));
+    } else if (e.target.name === "number-grids") {
+      setNumGrids(Number(e.target.value));
     }
   };
 
   const generateRandomNumber = (maxNum: number): number =>
-    Math.floor(Math.random() * (maxNum - 1)) + 1;
+    Math.floor(Math.random() * (maxNum)) + 1;
 
-  const isGridUnique = (grid: number[]): boolean => {
-    let isUnique = true;
-
-    // comparison logic
-
-    return isUnique;
-  };
+    function isGridUnique(arr1: number[]): boolean {
+      for (let i = 0; i < gridsArray.length; i++) {
+        if (gridsArray[i].length !== arr1.length) {
+          continue;
+        }
+        let isMatched = true;
+        for (let j = 0; j < arr1.length; j++) {
+          if (arr1[j] !== gridsArray[i][j]) {
+            isMatched = false;
+            break;
+          }
+        }
+        if (isMatched) {
+          return false;
+        }
+      }
+      return true;
+    }
 
   const populateNumbersArr = (): number[] => {
     const arr: number[] = [];
@@ -42,40 +56,43 @@ export const Main: React.FunctionComponent = () => {
   };
 
   const populateGridsArray = (): void => {
-    let newGrid: number[] = populateNumbersArr();
+    const existing = [...gridsArray];
 
-    for (let i = 0; i < numGrids; i) {
+    for (let i = 0; existing.length < numGrids; i) {
+      let newGrid: number[] = populateNumbersArr();
       if (isGridUnique(newGrid)) {
-        setGridsArray([...gridsArray, newGrid]);
+        existing.push(newGrid);
         i++;
-      } else {
-        newGrid = populateNumbersArr();
       }
     }
+    setGridsArray(existing);
   };
 
   return (
     <div className="main">
       <fieldset className="main__input-wraper">
         <label htmlFor="number-items" className="main__input-label">
-          Number of items
+          Number of items in grid
         </label>
         <input
           name="number-items"
           type="number"
           className="main__input"
-          placeholder="Enter multiple of 5"
+          placeholder="Enter multiple of 4"
           onChange={handleInputChange}
         />
         <label htmlFor="max-random-number" className="main__input-label">
           Max number
         </label>
-        <input name="max-random-number" type="text" className="main__input" />
+        <input name="max-random-number" type="number" className="main__input" onChange={handleInputChange} />
+        <label htmlFor="number-grids" className="main__input-label">How many grids?</label>
+        <input name="number-grids" type="number" className="main__input" onChange={handleInputChange} />
+        <button onClick={populateGridsArray}>Go</button>
       </fieldset>
-      {numItems != null && numItems > 4 && numItems % 5 === 0 ? (
-        gridsArray.map((grid) => <Grid numbersArr={grid} />)
+      {numItems != null && numItems > 4 && numItems % 4  === 0 ? (
+        gridsArray.map((grid, i) => <Grid key={i} numbersArr={grid} />)
       ) : (
-        <span>Must be multiple of 5!!!!!!!!!</span>
+        <span>Must be multiple of 4!!!!!!!!!</span>
       )}
     </div>
   );
