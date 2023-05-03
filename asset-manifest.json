@@ -1,0 +1,15 @@
+{
+  "files": {
+    "main.css": "/chino-grid-app/static/css/main.ec4e2d69.css",
+    "main.js": "/chino-grid-app/static/js/main.656cac2a.js",
+    "static/js/787.fab1160b.chunk.js": "/chino-grid-app/static/js/787.fab1160b.chunk.js",
+    "index.html": "/chino-grid-app/index.html",
+    "main.ec4e2d69.css.map": "/chino-grid-app/static/css/main.ec4e2d69.css.map",
+    "main.656cac2a.js.map": "/chino-grid-app/static/js/main.656cac2a.js.map",
+    "787.fab1160b.chunk.js.map": "/chino-grid-app/static/js/787.fab1160b.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.ec4e2d69.css",
+    "static/js/main.656cac2a.js"
+  ]
+}
